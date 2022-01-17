@@ -15,7 +15,7 @@ export default defineConfig({
     }),
     legacy({
       targets: ['defaults', 'not IE 11']
-    })
+    }),
   ],
   define: { 'process.env': {} },
   resolve: {
@@ -23,17 +23,4 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'),
     },
   },
-  /* remove the need to specify .vue files https://vitejs.dev/config/#resolve-extensions
-  resolve: {
-    extensions: [
-      '.js',
-      '.json',
-      '.jsx',
-      '.mjs',
-      '.ts',
-      '.tsx',
-      '.vue',
-    ]
-  },
-  */
 })

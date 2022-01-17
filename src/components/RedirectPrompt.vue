@@ -1,6 +1,6 @@
 <template>
   <v-container class="mt-8">
-    <v-row class="text-center" align="center">
+    <v-row class="text-center" align="center" v-if="dest">
       <v-col cols="12" md="8" class="mx-auto">
         <h1 class="mt-9 text-h4"><v-icon color="red-darken-2">mdi-alert</v-icon> 当前页面非茶馆工作室所属</h1>
         <p class="mt-1 text-body-2" style="overflow-x: auto;"><a :href="dest" target="_blank" rel="noopener noreferrer" class="text-grey-darken-1" style="text-overflow: ellipsis;">{{ dest }}</a></p>
@@ -10,13 +10,29 @@
         <br><a :href="terms[source]">服务条款</a> | <a :href="privacy[source]">隐私政策</a></p>
       </v-col>
     </v-row>
+    <p v-else>使用错误</p>
   </v-container>
 </template>
 
 <script setup lang="ts">
+import allowlist from '../allowlist.json'
+
 const searchParams = new URLSearchParams(window.location.search)
 
 const supportedSource = ['akaribot', 'default']
+
+const dest = searchParams.get('dest')
+// https://stackoverflow.com/a/53599074
+function endsWithAny(suffixes: string[], string: string) {
+    for (let suffix of suffixes) {
+        if(string.endsWith(suffix))
+            return true
+    }
+    return false
+}
+if (endsWithAny(allowlist, new URL(dest!).hostname)) {
+  globalThis.location.href = dest!
+}
 
 let ogSource = searchParams.get('source')
 if (ogSource && supportedSource.includes(ogSource)) {
@@ -24,9 +40,8 @@ if (ogSource && supportedSource.includes(ogSource)) {
 } else {
   ogSource = 'default'
 }
-
 const source = ogSource
-const dest = searchParams.get('dest')
+
 
 const names = {
   akaribot: '小可',
