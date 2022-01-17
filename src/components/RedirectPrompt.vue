@@ -25,9 +25,14 @@ const searchParams = new URLSearchParams(window.location.search)
 
 const supportedSource = ['akaribot', 'default']
 
-const dest = searchParams.get('dest')
+const rot13 = (message: string) => {
+  const originalAlpha = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  const cipher = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM"
+  return message.replace(/[a-z]/gi, letter => cipher[originalAlpha.indexOf(letter)])
+}
+const dest = searchParams.get('dest') || decodeURI(rot13(searchParams.get('rot13')!))
 // https://stackoverflow.com/a/53599074
-function endsWithAny(suffixes: string[], string: string) {
+const endsWithAny = (suffixes: string[], string: string) => {
     for (let suffix of suffixes) {
         if(string.endsWith(suffix))
             return true
