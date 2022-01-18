@@ -22,8 +22,6 @@
 </template>
 
 <script setup lang="ts">
-import allowlist from '../allowlist.json'
-
 const searchParams = new URLSearchParams(window.location.search)
 
 const supportedSource = ['akaribot', 'default']
@@ -43,6 +41,15 @@ const rot13 = (message: string) => {
 }
 const dest = searchParams.get('dest') || decodeURI(rot13(searchParams.get('rot13')!))
 let loading = $ref(false)
+const allowlist = [
+  // Teahouse
+  'teahou.se',
+  'wdf.ink',
+  'wd-ljt.com',
+  'wd-api.com',
+  // Requested
+  'bedev.cn'
+]
 if (endsWithAny(allowlist, new URL(dest!).hostname)) {
   loading = true
   window.location.href = dest!
