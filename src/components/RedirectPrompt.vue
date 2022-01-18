@@ -79,7 +79,10 @@ const terms = {
 }
 
 const go = () => {
-  if (browserBlock) { window.navigator.clipboard.writeText(dest!) }
+  if (browserBlock) {
+    mqq.ui.openUrl({ target: 2, url: dest! })
+    window.navigator.clipboard.writeText(dest!)
+  }
   loading = true
   window.location.href = dest!
 }

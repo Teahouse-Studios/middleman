@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vuetify from '@vuetify/vite-plugin'
 import legacy from '@vitejs/plugin-legacy'
+import { viteExternalsPlugin as externals } from 'vite-plugin-externals'
 
 import path from 'path'
 
@@ -18,6 +19,9 @@ export default defineConfig({
     legacy({
       targets: ['defaults', 'not IE 11']
     }),
+    externals({
+      mqq: 'mqq',
+    })
   ],
   define: { 'process.env': {} },
   resolve: {
