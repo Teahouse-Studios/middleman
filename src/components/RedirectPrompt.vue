@@ -1,7 +1,7 @@
 <template>
   <v-container class="mt-8">
     <v-row class="text-center" align="center" v-if="dest">
-      <v-col cols="12" md="8" class="mx-auto" v-if="!loading">
+      <v-col cols="12" md="8" class="mx-auto">
         <div class="mt-9">
           <v-progress-circular indeterminate size="100" color="indigo" v-if="loading" />
           <v-icon color="red-darken-2" size="100" v-else>mdi-alert</v-icon>
@@ -10,7 +10,9 @@
         <h1 class="mt-3 text-h4" v-else>当前页面非茶馆工作室所属</h1>
         <p class="mt-1 text-body-2" style="overflow-x: auto;"><a :href="dest" target="_blank" rel="noopener noreferrer" class="text-grey-darken-1" style="text-overflow: ellipsis;">{{ dest }}</a></p>
         <p class="mt-3 text-body-1">您正在访问一个非茶馆工作室所属的页面。茶馆工作室不对其安全性、合法性做任何保证。请注意您的网络信息安全，请勿输入有关账号和密码。</p>
-        <v-btn class="mt-5 text-white" block flat color="indigo-darken-1" @click="go()">访问此页面</v-btn>
+        <v-btn class="mt-5 text-white" block flat disabled v-if="loading"><v-progress-circular indeterminate /></v-btn>
+        <v-btn class="mt-5 text-white" block flat color="indigo-darken-1" @click="go()" v-if="!loading">访问此页面</v-btn>
+        <p class="mt-3 text-caption" v-if="browserBlock">您目前的浏览器可能会拦截您的浏览。为了以防万一，我们另会复制网址至剪贴板中。</p>
         <p class="bottom text-body-2 text-grey-darken-1">© {{ new Date().getFullYear() }} <a href="https://teahou.se/">Teahouse Studios</a> | 来源：{{ names[source] }}
         <br><a :href="terms[source]">服务条款</a> | <a :href="privacy[source]">隐私政策</a></p>
       </v-col>
@@ -26,20 +28,20 @@ const searchParams = new URLSearchParams(window.location.search)
 
 const supportedSource = ['akaribot', 'default']
 
+let browserBlock = false
+const UABlacklist = [
+  /QQ\//
+]
+if (matchAny(UABlacklist, globalThis.navigator.userAgent)) {
+  browserBlock = true
+}
+
 const rot13 = (message: string) => {
   const originalAlpha = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
   const cipher = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM"
   return message.replace(/[a-z]/gi, letter => cipher[originalAlpha.indexOf(letter)])
 }
 const dest = searchParams.get('dest') || decodeURI(rot13(searchParams.get('rot13')!))
-// https://stackoverflow.com/a/53599074
-const endsWithAny = (suffixes: string[], string: string) => {
-    for (let suffix of suffixes) {
-        if(string.endsWith(suffix))
-            return true
-    }
-    return false
-}
 let loading = $ref(false)
 if (endsWithAny(allowlist, new URL(dest!).hostname)) {
   loading = true
@@ -68,9 +70,27 @@ const terms = {
   default: 'https://teahou.se/terms',
 }
 
-function go() {
+const go = () => {
+  if (browserBlock) { globalThis.navigator.clipboard.writeText(dest!) }
   loading = true
   globalThis.location.href = dest!
+}
+
+// https://stackoverflow.com/a/53599074
+function endsWithAny (suffixes: string[], string: string): boolean {
+  for (let suffix of suffixes) {
+    if (string.endsWith(suffix))
+      return true
+    }
+  return false
+}
+
+function matchAny (regexes: RegExp[], string: string): boolean {
+  for (let regex of regexes) {
+    if (string.match(regex))
+      return true
+  }
+  return false
 }
 </script>
 
