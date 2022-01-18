@@ -32,7 +32,7 @@ let browserBlock = false
 const UABlacklist = [
   /QQ\//
 ]
-if (matchAny(UABlacklist, globalThis.navigator.userAgent)) {
+if (matchAny(UABlacklist, window.navigator.userAgent)) {
   browserBlock = true
 }
 
@@ -45,7 +45,7 @@ const dest = searchParams.get('dest') || decodeURI(rot13(searchParams.get('rot13
 let loading = $ref(false)
 if (endsWithAny(allowlist, new URL(dest!).hostname)) {
   loading = true
-  globalThis.location.href = dest!
+  window.location.href = dest!
 }
 
 let ogSource = searchParams.get('source')
@@ -71,9 +71,9 @@ const terms = {
 }
 
 const go = () => {
-  if (browserBlock) { globalThis.navigator.clipboard.writeText(dest!) }
+  if (browserBlock) { window.navigator.clipboard.writeText(dest!) }
   loading = true
-  globalThis.location.href = dest!
+  window.location.href = dest!
 }
 
 // https://stackoverflow.com/a/53599074
