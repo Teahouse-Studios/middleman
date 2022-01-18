@@ -80,7 +80,11 @@ const terms = {
 
 const go = () => {
   if (browserBlock) {
-    mqq.ui.openUrl({ target: 2, url: dest! })
+    mqq.invoke("ui", "openUrl",{
+      url: dest!,
+      target: 2,
+      style: 1
+    })
     window.navigator.clipboard.writeText(dest!)
   }
   loading = true
