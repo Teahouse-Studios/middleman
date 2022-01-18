@@ -9,7 +9,8 @@
         <h1 class="mt-3 text-h4" v-if="loading">正在重定向中</h1>
         <h1 class="mt-3 text-h4" v-else>当前页面非茶馆工作室所属</h1>
         <p class="mt-1 text-body-2" style="overflow-x: auto;"><a :href="dest" target="_blank" rel="noopener noreferrer" class="text-grey-darken-1" style="text-overflow: ellipsis;">{{ dest }}</a></p>
-        <p class="mt-3 text-body-1">您正在访问一个非茶馆工作室所属的页面。茶馆工作室不对其安全性、合法性做任何保证。请注意您的网络信息安全，请勿输入有关账号和密码。</p>
+        <p class="mt-3 text-body-1" v-if="loading">正在跳转至您要访问的网站。请稍安勿躁。</p>
+        <p class="mt-3 text-body-1" v-else>您正在访问一个非茶馆工作室所属的页面。茶馆工作室不对其安全性、合法性做任何保证。请注意您的网络信息安全，请勿输入有关账号和密码。</p>
         <v-btn class="mt-5 text-white" block flat disabled v-if="loading"><v-progress-circular indeterminate /></v-btn>
         <v-btn class="mt-5 text-white" block flat color="indigo-darken-1" @click="go()" v-if="!loading">访问此页面</v-btn>
         <p class="mt-3 text-caption" v-if="browserBlock">您目前的浏览器可能会拦截您的浏览。为了以防万一，我们另会复制网址至剪贴板中。</p>
