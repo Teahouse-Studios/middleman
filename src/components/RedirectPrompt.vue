@@ -51,7 +51,7 @@ const allowlist = [
   // Requested
   'bedev.cn'
 ]
-if (endsWithAny(allowlist, new URL(dest!).hostname)) {
+if (endsWithAny(allowlist, new URL(dest!).hostname) || searchParams.get('passThru')! === 'true') {
   loading = true
   window.location.href = dest!
 }
