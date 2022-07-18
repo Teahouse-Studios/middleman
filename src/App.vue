@@ -1,11 +1,12 @@
 <template>
   <v-app>
     <v-main>
-      <redirect-prompt />
+      <RedirectPrompt />
     </v-main>
   </v-app>
 </template>
 
 <script setup lang="ts">
 import RedirectPrompt from './components/RedirectPrompt.vue'
+const lol = 'lol eslint'
 </script>
