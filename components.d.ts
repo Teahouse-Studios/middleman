@@ -7,10 +7,14 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    Counter: typeof import('./src/components/Counter.vue')['default']
-    Footer: typeof import('./src/components/Footer.vue')['default']
     RedirectPrompt: typeof import('./src/components/RedirectPrompt.vue')['default']
-    RouterLink: typeof import('vue-router')['RouterLink']
-    RouterView: typeof import('vue-router')['RouterView']
+    VApp: typeof import('vuetify/components')['VApp']
+    VBtn: typeof import('vuetify/components')['VBtn']
+    VCol: typeof import('vuetify/components')['VCol']
+    VContainer: typeof import('vuetify/components')['VContainer']
+    VIcon: typeof import('vuetify/components')['VIcon']
+    VMain: typeof import('vuetify/components')['VMain']
+    VProgressCircular: typeof import('vuetify/components')['VProgressCircular']
+    VRow: typeof import('vuetify/components')['VRow']
   }
 }

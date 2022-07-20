@@ -3,6 +3,7 @@ import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import Vuetify from '@vuetify/vite-plugin'
 import Components from 'unplugin-vue-components/vite'
+import { Vuetify3Resolver, } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
 
 export default defineConfig({
@@ -18,7 +19,7 @@ export default defineConfig({
 
     // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
     Vuetify({
-      autoImport: true,
+      autoImport: false,
     }),
 
     // https://github.com/antfu/unplugin-auto-import
@@ -28,6 +29,7 @@ export default defineConfig({
         'vue/macros',
         'vue-router',
         '@vueuse/core',
+
       ],
       dts: true,
       dirs: [
@@ -39,6 +41,9 @@ export default defineConfig({
     // https://github.com/antfu/vite-plugin-components
     Components({
       dts: true,
+      resolvers: [
+        Vuetify3Resolver(),
+      ]
     }),
   ],
 })
