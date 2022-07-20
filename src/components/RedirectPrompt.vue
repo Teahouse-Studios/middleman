@@ -117,9 +117,9 @@ const rot13 = (message: string) => {
   return message.replace(/[a-z]/gi, letter => cipher[originalAlpha.indexOf(letter)])
 }
 
-const rawDest = searchParams.get('dest') || 'https://teahouse.team/'
+const rawDest = searchParams.get('dest') || 'https://example.com/'
 const rot13Dest = searchParams.get('rot13')
-const dest = rot13Dest ? rot13(rawDest) : rawDest
+const dest = rot13Dest ? rot13(rot13Dest) : rawDest
 let loading = $ref(false)
 const allowlist = [
   // Teahouse
@@ -127,6 +127,7 @@ const allowlist = [
   'wdf.ink',
   'wd-ljt.com',
   'wd-api.com',
+  'teahouse.team',
   // Requested
   'bedev.cn'
 ]
