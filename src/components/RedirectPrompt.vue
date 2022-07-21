@@ -1,5 +1,5 @@
 <template>
-  <v-container class="mt-8">
+  <v-container class="redirect-container">
     <v-row
       v-if="dest"
       class="text-center"
@@ -44,7 +44,7 @@
             :href="dest"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-grey-darken-1"
+            class="text-responsive-gray"
             style="text-overflow: ellipsis;"
           >{{ dest }}</a>
         </p>
@@ -88,16 +88,49 @@
         >
           访问此页面
         </v-btn>
-        <div class="bottom text-body-2 text-grey-darken-1">
-          <p>© {{ new Date().getFullYear() }} <a href="https://teahouse.team/">Teahouse Studios</a> | 来源：{{ names[source] || '位置' }}</p>
-          <p><a href="https://beian.miit.gov.cn/">蜀 ICP 备 2022011374 号-1</a></p>
-        </div>
       </v-col>
     </v-row>
     <p v-else>
       使用错误
     </p>
   </v-container>
+
+  <div class="bottom text-body-2 text-responsive-gray line-list">
+    <v-divider class="mb-2" />
+    <ul>
+      <li>来源：{{ names[source] || '位置' }}</li>
+    </ul>
+    <ul>
+      <li>
+        © {{ new Date().getFullYear() }} <a
+          href="https://teahouse.team/"
+          rel="noopener noreferer"
+          target="_blank"
+        >茶馆工作室</a>
+      </li>
+      <li>
+        <a
+          href="https://beian.miit.gov.cn/"
+          rel="noopener noreferer"
+          target="_blank"
+        >蜀 ICP 备 2022011374 号-1</a>
+      </li>
+      <li>
+        <a
+          href="https://teahouse.team/terms"
+          rel="noopener noreferer"
+          target="_blank"
+        >服务条款</a>
+      </li>
+      <li>
+        <a
+          href="https://teahouse.team/privacy"
+          rel="noopener noreferer"
+          target="_blank"
+        >隐私政策</a>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -187,14 +220,38 @@ function matchAny (regexes: RegExp[], string: string): boolean {
 </script>
 
 <style lang="scss" scoped>
+.redirect-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 .bottom {
-  position: absolute;
+  position: fixed;
   bottom: 10px;
-  left: 0;
-  right: 0;
+  text-align: center;
+  width: 100%;
 }
 
-a {
-  color: #1565C0;
+.line-list {
+  ul {
+    position: relative;
+    box-sizing: border-box;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  li {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  li:not(:first-child):before {
+    content: '\00a0|\00a0';
+    display: inline-block;
+    display: inline-block;
+    width: 10px;
+    margin-left: -10px;
+  }
 }
 </style>

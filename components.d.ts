@@ -14,9 +14,11 @@ declare module '@vue/runtime-core' {
     VBtn: typeof import('vuetify/components')['VBtn']
     VCol: typeof import('vuetify/components')['VCol']
     VContainer: typeof import('vuetify/components')['VContainer']
+    VDivider: typeof import('vuetify/components')['VDivider']
     VIcon: typeof import('vuetify/components')['VIcon']
     VMain: typeof import('vuetify/components')['VMain']
     VProgressCircular: typeof import('vuetify/components')['VProgressCircular']
     VRow: typeof import('vuetify/components')['VRow']
+    VSpacer: typeof import('vuetify/components')['VSpacer']
   }
 }
