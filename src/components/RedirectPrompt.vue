@@ -3,7 +3,6 @@
     <v-row
       v-if="dest"
       class="text-center"
-      align="center"
     >
       <v-col
         cols="12"
@@ -70,26 +69,29 @@
         >
           <v-progress-circular indeterminate />
         </v-btn>
+        <v-alert
+          v-if="browserBlock"
+          class="mt-3 text-left"
+          type="warning"
+          icon="mdi-penguin"
+        >
+          <v-alert-title>警告</v-alert-title>
+          您使用的浏览器可能会拦截您的浏览。我们建议您在右上角选择使用系统浏览器打开此页面。
+        </v-alert>
         <v-btn
           v-if="!loading"
           class="mt-5 text-white"
           block
           flat
-          color="indigo-darken-1"
+          :color="browserBlock ? 'error' : 'indigo-darken-1'"
           @click="go()"
         >
           访问此页面
         </v-btn>
-        <p
-          v-if="browserBlock"
-          class="mt-3 text-caption"
-        >
-          您目前的浏览器可能会拦截您的浏览。为了以防万一，我们另会复制网址至剪贴板中。
-        </p>
-        <p class="bottom text-body-2 text-grey-darken-1">
-          © {{ new Date().getFullYear() }} <a href="https://teahou.se/">Teahouse Studios</a> | 来源：{{ names[source] }}
-          <br><a :href="terms[source]">服务条款</a> | <a :href="privacy[source]">隐私政策</a>
-        </p>
+        <div class="bottom text-body-2 text-grey-darken-1">
+          <p>© {{ new Date().getFullYear() }} <a href="https://teahouse.team/">Teahouse Studios</a> | 来源：{{ names[source] || '位置' }}</p>
+          <p><a href="https://beian.miit.gov.cn/">蜀 ICP 备 2022011374 号-1</a></p>
+        </div>
       </v-col>
     </v-row>
     <p v-else>

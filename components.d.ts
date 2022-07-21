@@ -8,6 +8,8 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     RedirectPrompt: typeof import('./src/components/RedirectPrompt.vue')['default']
+    VAlert: typeof import('vuetify/components')['VAlert']
+    VAlertTitle: typeof import('vuetify/components')['VAlertTitle']
     VApp: typeof import('vuetify/components')['VApp']
     VBtn: typeof import('vuetify/components')['VBtn']
     VCol: typeof import('vuetify/components')['VCol']
