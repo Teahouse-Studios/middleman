@@ -58,7 +58,10 @@ export default function Home() {
       <h1 className="font-extrabold text-3xl mb-2">
         <Balancer>当前页面非茶馆工作室所属</Balancer>
       </h1>
-      <a href={dest} className="font-xs text-slate-500 mb-3">
+      <a
+        href={dest}
+        className="font-xs text-slate-500 dark:text-slate-300 mb-3 underline"
+      >
         {dest}
       </a>
       <p className="mb-5">
@@ -80,7 +83,9 @@ export default function Home() {
       <Button
         size="lg"
         className={`${
-          browserBlocked ? '' : 'bg-blue-600 hover:bg-blue-700'
+          browserBlocked
+            ? ''
+            : 'bg-blue-600 hover:bg-blue-700 dark:bg-blue-400 dark:hover:bg-blue-500'
         } w-full max-w-[60rem]`}
         variant={browserBlocked ? 'destructive' : undefined}
         onClick={go}
