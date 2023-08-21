@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Separator } from '@/app/components/ui/separator'
 import { Provider } from 'react-wrap-balancer'
-import { ThemeProvider } from './components/ThemeProvider'
+import { ThemeProvider } from '@/app/components/ThemeProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
