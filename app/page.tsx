@@ -7,15 +7,13 @@ import { Button } from '@/app/components/ui/button'
 import { Alert, AlertDescription, AlertTitle } from '@/app/components/ui/alert'
 import Balancer from 'react-wrap-balancer'
 import { useEffect, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 
-export default function Home({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined }
-}) {
+export default function Home() {
+  const searchParams = Object.fromEntries(useSearchParams())
   const dest =
     searchParams.dest ?? typeof searchParams.rot13 === 'string'
-      ? rot13(searchParams.rot13 as string)
+      ? rot13(searchParams.rot13)
       : 'https://google.com/'
 
   const [browserBlocked, setBrowserBlocked] = useState(false)
