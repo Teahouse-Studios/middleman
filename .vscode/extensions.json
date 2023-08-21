@@ -1,8 +1,0 @@
-{
-  "recommendations": [
-    "antfu.vite",
-    "antfu.goto-alias",
-    "vue.volar",
-    "dbaeumer.vscode-eslint"
-  ]
-}
